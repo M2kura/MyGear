@@ -52,6 +52,17 @@ a {
     text-align: center;
 }
 
+.avatar {
+    display: block;
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: #ffffff;
+    object-fit: cover;
+}
+
 .logo {
     font-size: clamp(3rem, 9vw, 5.5rem);
     font-weight: 800;
@@ -236,6 +247,12 @@ a {
 
     .socials a {
         padding: 10px 14px;
+    }
+
+    .avatar {
+        width: 88px;
+        height: 88px;
+        margin-bottom: 20px;
     }
 
     .category {
