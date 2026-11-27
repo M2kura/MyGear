@@ -10,16 +10,14 @@
         return node;
     }
 
-    function linkButton(href, label, primary) {
-        const a = el("a", primary ? "btn btn-primary" : "btn", label);
-        a.href = href;
-        a.target = "_blank";
-        a.rel = "sponsored noopener";
-        return a;
-    }
-
     function card(product) {
-        const item = el("article", "item");
+        const href = product.amazon || product.link;
+        const item = el(href ? "a" : "article", "item");
+        if (href) {
+            item.href = href;
+            item.target = "_blank";
+            item.rel = product.amazon ? "sponsored noopener" : "noopener";
+        }
 
         const media = el("div", "item-media");
         if (product.image) {
@@ -28,25 +26,15 @@
             img.alt = product.name;
             img.loading = "lazy";
             media.appendChild(img);
-        } else {
-            media.classList.add("item-media-empty");
         }
         item.appendChild(media);
 
-        item.appendChild(el("h3", "item-name", product.name));
-
-        const links = el("div", "item-links");
-        if (product.amazon) {
-            links.appendChild(linkButton(product.amazon, "Amazon", true));
+        const body = el("div", "item-body");
+        body.appendChild(el("h3", "item-name", product.name));
+        if (href) {
+            body.appendChild(el("span", "item-cta", product.amazon ? "Amazon ↗" : "Website ↗"));
         }
-        if (product.link) {
-            const a = linkButton(product.link, "Website", !links.children.length);
-            a.rel = "noopener";
-            links.appendChild(a);
-        }
-        if (links.children.length) {
-            item.appendChild(links);
-        }
+        item.appendChild(body);
 
         return item;
     }
@@ -65,7 +53,12 @@
 
         groups.forEach(function (items, cat) {
             const section = el("section", "category");
-            section.appendChild(el("h2", "category-title", cat));
+            const head = el("div", "category-head");
+            head.appendChild(el("h2", "category-title", cat));
+            head.appendChild(el("span", "category-rule"));
+            head.appendChild(el("span", "category-count", String(items.length).padStart(2, "0")));
+            section.appendChild(head);
+
             const grid = el("div", "grid");
             items.forEach(function (p) {
                 grid.appendChild(card(p));

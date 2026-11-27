@@ -49,7 +49,7 @@ const PRODUCTS = [
     },
     {
         category: "Audio",
-        name: "Audio-Technica ATH-M40x",
+        name: "Audio\u2011Technica ATH\u2011M40x",
         image: "https://m.media-amazon.com/images/I/612QNnTYz0L._AC_SL500_.jpg",
         amazon: "https://www.amazon.com/dp/B00HVLUR54?tag=m2kura-20&linkCode=ll2&linkId=8713aa54200f02b0387be7f485ff889a",
         link: ""
